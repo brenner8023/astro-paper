@@ -1,36 +1,38 @@
 ---
 layout: ../layouts/AboutLayout.astro
-title: "About"
+title: "I'm 前端爆冲."
 ---
 
-AstroPaper is a minimal, responsive and SEO-friendly Astro blog theme. I designed and crafted this based on [my personal blog](https://satnaing.dev/blog).
+<style>
+  #about h2 { margin-top: 0; }
+</style>
 
-This theme is aimed to be accessible out of the box. Light and dark mode are supported by
-default and additional color schemes can also be configured.
+<img src="/assets/intro.jpg" alt="pingpong" class="float-left w-2/5 mr-12 rounded">
 
-This theme is self-documented \_ which means articles/posts in this theme can also be considered as documentations. So, see the documentation for more info.
+- team member of iduxfe, devui
+- contributor of `@vue/composition-api`, `vite-plugin-vue-devtools`
+- owner of `gdut-course`
+- school 是 Jieyang NO.1 Middle School -> 989 高校
+- job 是软件开发工程师
+- 工作关键词：拓扑虚拟机，通宵吃窑鸡，女装大佬
+- 工作内容：pc、pwa 前端页面开发、node 中间层开发
+- 打乒乓球喜欢发球抢搓，中国象棋喜欢敢死炮
+- 喜欢的剧是仙剑，匹诺曹，喜欢的动漫是死神
 
-<div>
-  <img src="/assets/dev.svg" class="sm:w-1/2 mx-auto" alt="coding dev illustration">
-</div>
+<div class="clear-left"></div>
+
+<img src="/assets/intro2.jpeg" alt="pingpong" class="float-right w-2/5 rounded">
 
 ## Tech Stack
 
-This theme is written in vanilla JavaScript (+ TypeScript for type checking) and a little bit of ReactJS for some interactions. TailwindCSS is used for styling; and Markdown is used for blog contents.
+- 两面反胶弧圈铁搓
+- Vue3/Vue2/React
+- TypeScript
+- NodeJS(Express.js)
+- Less/Tailwindcss
+- pnpm/Vite/Webpack5+
 
-## Features
+<div class="clear-right"></div>
 
-Here are certain features of this site.
-
-- fully responsive and accessible
-- SEO-friendly
-- light & dark mode
-- fuzzy search
-- super fast performance
-- draft posts
-- pagination
-- sitemap & rss feed
-- highly customizable
-
-If you like this theme, you can star/contribute to the [repo](https://github.com/satnaing/astro-paper).  
-Or you can even give any feedback via my [email](mailto:contact@satnaing.dev).
+If you like my posts, you can star to the [repo](https://github.com/brenner8023/astro-paper).  
+Or you can even give any feedback via my [email](mailto:vue666@qq.com).
