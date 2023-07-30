@@ -1,0 +1,101 @@
+---
+import { SITE } from "@config";
+import Layout from "@layouts/Layout.astro";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+
+---
+
+<Layout title={`upload | ${SITE.title}`}>
+  <Header />
+
+  <main id="main-content">
+    <textarea id="upload-textarea" cols="50" rows="10" placeholder="请粘贴图片"></textarea>
+    <input id="upload-result" class="block w-full rounded border border-skin-fill 
+        border-opacity-40 bg-skin-fill py-3 pl-2
+        pr-3 placeholder:italic placeholder:text-opacity-75 
+        focus:border-skin-accent focus:outline-none"
+        type="text"
+    />
+  </main>
+
+  <Footer />
+</Layout>
+
+<script>
+const $textarea = document.getElementById('upload-textarea');
+const $result = document.getElementById('upload-result')!;
+
+const resultVal = window.localStorage.getItem('upload-result') || '';
+$result.value = resultVal;
+
+$textarea?.addEventListener('paste', event => {
+    const items = event.clipboardData!.items;
+    let file = null;
+    if (items && items.length) {
+        // 搜索剪切板items
+        for (let i = 0; i < items.length; i++) {
+            if (items[i].type.indexOf('image') !== -1) {
+                file = items[i].getAsFile();
+                break;
+            }
+        }
+    } else {
+        $result.innerText = '当前浏览器不支持'
+        return;
+    }
+    if (!file) {
+        $result.innerText = '粘贴内容非图片'
+        return;
+    }
+
+    // 如果需要预览，可以执行下面代码
+    // var reader = new FileReader()
+    // reader.onload = function(event) {
+    //     preview.innerHTML = '<img src="' + event.target.result + '" class="upload-image">';
+    // }
+    // reader.readAsDataURL(file);
+
+    // 这里是上传
+    const xhr = new XMLHttpRequest();
+    const formData = new FormData();
+    formData.append('file', file);
+
+    // 上传进度
+    if (xhr.upload) {
+        xhr.upload.addEventListener('progress', function (event) {
+            $result.innerText = '正在上传，进度：' + Math.round(100 * event.loaded / event.total) / 100 + '%';
+        }, false);
+    }
+    // 上传结束
+    xhr.onload = function () {
+        const responseText = xhr.responseText;
+        $result.value = responseText;
+        window.localStorage.setItem('upload-result', responseText)
+    };
+    xhr.onerror = function () {
+        $result.innerText = '异常，上传失败';
+    };
+    xhr.open('POST', './upload-img', true);
+    xhr.send(formData);
+
+    // fetch('./upload-img', {
+    //     method: 'POST',
+    //     body: formData,
+    // }).then(function (response) {
+    //     return response.text()
+    // })
+});
+</script>
+
+<style>
+  #main-content {
+    @apply mx-auto max-w-3xl flex-1 mt-16;
+  }
+
+  #upload-textarea {
+    @apply w-full h-32 rounded border border-skin-fill border-opacity-40
+        bg-skin-fill py-3 pl-4 pr-3 placeholder:italic placeholder:text-opacity-75 
+        focus:border-skin-accent focus:outline-none;
+  }
+</style>

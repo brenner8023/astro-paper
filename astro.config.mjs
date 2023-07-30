@@ -4,10 +4,11 @@ import react from "@astrojs/react";
 import remarkToc from "remark-toc";
 import remarkCollapse from "remark-collapse";
 import sitemap from "@astrojs/sitemap";
+import { uploader } from './build/vite-upload-plugin.mjs';
 
 // https://astro.build/config
 export default defineConfig({
-  site: "https://astro-paper.pages.dev/", // replace this with your deployed domain
+  site: "https://vue666.vercel.app/", // replace this with your deployed domain
   integrations: [
     tailwind({
       config: {
@@ -37,5 +38,6 @@ export default defineConfig({
     optimizeDeps: {
       exclude: ["@resvg/resvg-js"],
     },
+    plugins: [uploader(),],
   },
 });
